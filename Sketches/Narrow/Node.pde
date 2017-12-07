@@ -26,12 +26,18 @@ class Node extends PVector {
   float minX=5, minY=5, maxX=width-5, maxY=height-5;
 
   // damping of the velocity (0 = no damping, 1 = full damping)
-  float damping = 0.1;
-
+  float damping = .01;
+  
+  float initX;
+  float initY;
+  float counter = 0.01;
 
   Node(float theX, float theY) {
     x = theX;
     y = theY;
+    initX = theX;
+    initY = theY;
+    
   }
 
   // ------ calculate new position of the node ------
@@ -59,5 +65,26 @@ class Node extends PVector {
 
     velocity.x *= (1-damping);
     velocity.y *= (1-damping);
+    
+    //CounterVelocity - Back to Origin Point
+    if(x > initX){
+      float distX = x - initX;
+      velocity.x -= distX * (counter);      
+    }
+       //CounterVelocity - Back to Origin Point
+    if(x < initX){
+      float distX = initX - x;
+      velocity.x += distX * (counter);      
+    }
+    if(y < initY){
+      float distY = y - initY;
+      velocity.y -= distY * (counter);      
+    }
+    if(y > initY){
+      float distY = initY-y;
+      velocity.y = distY * (counter);      
+    }
+
+    
   }
 }
