@@ -27,12 +27,10 @@ class Attractor {
   float strength = 1;  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
-  int id = -1;
 
-  Attractor(float theX, float theY, int id) {
+  Attractor(float theX, float theY) {
     x = theX;
     y = theY;
-    this.id = id;
   }
 
 

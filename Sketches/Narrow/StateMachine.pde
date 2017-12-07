@@ -26,7 +26,7 @@ class StateMachine {
   }
 
   void update() {
-    if(alpha >= 255){
+    if(alpha == 255){
       
       currentState = newState;
       
@@ -66,19 +66,31 @@ class StateMachine {
     alpha = 0;
     Ani.to(applet, time, "alpha", 255);
   }
+  
+  void playerAdded(Player player){
+    currentState.playerAdded(player);
+    if(alpha != 255){
+      newState.playerAdded(player);
+    }
+  }
+  
+  void playerRemoved(Player player){
+    currentState.playerRemoved(player);
+    if(alpha != 255){
+      newState.playerRemoved(player);
+    }
+  }
 }
 
   
 void pharusPlayerAdded(Player player)
   {
     println("Player " + player.id + " added");
-    
-    // TODO do something here if needed
+    stateMachine.playerAdded(player);
   }
   
   void pharusPlayerRemoved(Player player)
   {
     println("Player " + player.id + " removed");
-    
-    // TODO do something here if needed  
+    stateMachine.playerRemoved(player); 
   }

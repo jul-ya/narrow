@@ -22,4 +22,7 @@ public abstract class State {
   
   abstract void exitTransition(State to, float time);
   
+  abstract void playerAdded(Player player);
+  abstract void playerRemoved(Player player);
+  
 }

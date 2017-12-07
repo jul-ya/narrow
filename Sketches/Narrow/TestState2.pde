@@ -19,4 +19,10 @@ public class TestState2 extends State{
     println("exit " + this.getClass().getName());
   }
   
+  void playerAdded(Player player){
+  }
+  
+  void playerRemoved(Player player){
+  }
+  
 }

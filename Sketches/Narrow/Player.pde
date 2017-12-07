@@ -73,8 +73,24 @@ class Player
     return 0;
   }  
 
-  // TODO extend this with additional functions
-
+  @Override
+  public boolean equals(Object obj) 
+  {
+    if(obj instanceof Player){
+      Player other = (Player)obj;
+      return (this.id == other.id);
+    } else {
+      return false;
+    }
+  }
+  
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + (int) (id ^ (id >>> 32));
+    return result;
+  }
 }
 
 // helper class for feet

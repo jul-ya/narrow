@@ -1,25 +1,20 @@
 public class TestState1 extends State{
-      //INIT
-    //NodeStep
-    int stepX = 20;
-    int stepY = 20;
-    //NodeShape
-    int nSize = 3;
-    //AttractorCount
-    int aCount = 1;
-    
-    ArrayList<Node> nodes = new ArrayList<Node>(0);
-    ArrayList<Attractor> attractors = new ArrayList<Attractor>(0);
+    //INIT
+  //NodeStep
+  int stepX = 20;
+  int stepY = 20;
+  //NodeShape
+  int nSize = 3;
+  //AttractorCount
+  int aCount = 1;
   
+  ArrayList<Node> nodes = new ArrayList<Node>(0);
+  
+  HashMap<Player, Attractor> attractorMap = new HashMap<Player, Attractor>();
   
   public TestState1(StateMachine stateMachine){
     super(stateMachine);
-    //Create NodeGrid
     placeNodes();
-    
-    //Create Attractor 
-    //***********TODO****** - Create Attractor per TUIO Player)
-    createAttractor();
   }
   
   void enterTransition(State from, float time) {
@@ -54,21 +49,13 @@ public class TestState1 extends State{
   
   void attractNodes(){
    
-    
-    
-    for(int i = 0; i < attractors.size(); i++)
+    for(HashMap.Entry<Player, Attractor> entry : attractorMap.entrySet())
     {
-      Attractor a = attractors.get(i);
-      //Iterate over all Players
-      for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet()) 
-      {
-         Player p = playersEntry.getValue();
-         if(p.id == a.id)
-         {
-          a.x = p.x;
-          a.y = p.y;
-         }
-      }
+      Player p = entry.getKey();
+      Attractor a = entry.getValue();
+      
+      a.x = p.x;
+      a.y = p.y;
        //<>//
       for(int j = 0; j < nodes.size(); j++)
       {
@@ -77,29 +64,26 @@ public class TestState1 extends State{
         n.update();
       } 
     }  
-  }
-  
-  void createAttractor(){
-   for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet())  //<>//
-    {
-      Player p = playersEntry.getValue();
-      
-      attractors.add(new Attractor(p.x,p.y,p.id));
-    }
-  
-  }
-  
+  } //<>//
   
   void placeNodes(){
     
     //Add Nodes depending on Grid
-    for(int y = stepY/2; y < height; y+=stepY){
+    for(int y = stepY/2; y < WindowHeight; y+=stepY){
       
-      for(int x = stepX/2; x < width; x+=stepX){
+      for(int x = stepX/2; x < WindowWidth; x+=stepX){
         {
           nodes.add(new Node(x,y));
         }
       }
     }
+  }
+  
+  void playerAdded(Player player){
+    attractorMap.put(player, new Attractor(player.x, player.y));
+  }
+  
+  void playerRemoved(Player player){
+    attractorMap.remove(player);
   }
 }
