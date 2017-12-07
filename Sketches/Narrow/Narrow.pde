@@ -31,7 +31,7 @@ void setup()
   textFont(font, 18);
   textAlign(CENTER, CENTER);
 
-  initPlayerTracking();
+  //initPlayerTracking();
   Ani.init(this);
   
   stateMachine = new StateMachine(WindowWidth, WindowHeight, WallHeight, this);
@@ -45,7 +45,7 @@ void draw()
   // clear background with white
   background(255);
 
-  drawPlayerTracking();
+  //drawPlayerTracking();
   
   stateMachine.update();
   
