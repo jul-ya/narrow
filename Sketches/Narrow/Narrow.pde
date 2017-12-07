@@ -33,7 +33,7 @@ void setup()
 
   initPlayerTracking();
   
-  stateMachine = new StateMachine();
+  stateMachine = new StateMachine(WindowWidth, WindowHeight, WallHeight);
   testState1 = new TestState1(stateMachine);
   testState2 = new TestState2(stateMachine);
   stateMachine.setState(testState1);
@@ -44,16 +44,11 @@ void draw()
   // clear background with white
   background(255);
 
-  // set upper half of window (=wall projection) bluish
-  noStroke();
-  fill(70, 100, 150);
-  rect(0, 0, WindowWidth, WallHeight);
-  fill(150);
-  text((int)frameRate + " FPS", width / 2, 10);
-
   drawPlayerTracking();
   
   stateMachine.update();
+  
+  text((int)frameRate + " FPS", width / 2, 10);
 }
 
 void keyPressed()

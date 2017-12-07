@@ -9,6 +9,10 @@ public class TestState1 extends State{
   }
   
   void update(){
+    pg.noStroke();
+    pg.fill(70, 100, 150);
+    pg.rect(0, 0, stateMachine.windowWidth, stateMachine.wallHeight);
+    pg.fill(150);
   }
   
   void exitTransition(State to, float time) {
