@@ -1,10 +1,10 @@
 public abstract class State {
   
-  protected StateMachine stateMachine;
+  protected StateMachine m;
   public PGraphics pg;
   
   public State(StateMachine stateMachine){
-    this.stateMachine = stateMachine;
+    this.m = stateMachine;
     this.pg = createGraphics(WindowWidth, WindowHeight);
   }
 
