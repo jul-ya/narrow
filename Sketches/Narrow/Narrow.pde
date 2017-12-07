@@ -34,7 +34,7 @@ void setup()
   //initPlayerTracking();
   Ani.init(this);
   
-  stateMachine = new StateMachine(WindowWidth, WindowHeight, WallHeight, this);
+  stateMachine = new StateMachine(this);
   testState1 = new TestState1(stateMachine);
   testState2 = new TestState2(stateMachine);
   stateMachine.setState(testState1);
