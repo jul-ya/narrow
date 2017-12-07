@@ -5,7 +5,7 @@ public abstract class State {
   
   public State(StateMachine stateMachine){
     this.stateMachine = stateMachine;
-    this.pg = createGraphics(stateMachine.windowWidth, stateMachine.windowHeight);
+    this.pg = createGraphics(WindowWidth, WindowHeight);
   }
 
   abstract void enterTransition(State from, float time);

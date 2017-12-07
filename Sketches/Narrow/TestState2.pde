@@ -11,7 +11,7 @@ public class TestState2 extends State{
   void update(){
     pg.noStroke();
     pg.fill(70, 0, 150);
-    pg.rect(0, 0, stateMachine.windowWidth, stateMachine.wallHeight);
+    pg.rect(0, 0, WindowWidth, WallHeight);
     pg.fill(150);
   }
   

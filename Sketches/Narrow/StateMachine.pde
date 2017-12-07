@@ -6,20 +6,14 @@ class StateMachine {
   State currentState;
   State newState;
   
-  public int windowWidth;
-  public int windowHeight;
-  public int wallHeight;
   public PharusClient pc;
   
   PApplet applet;
   
-  StateMachine(int windowWidth, int windowHeight, int wallHeight, PApplet applet){
-    this.windowWidth = windowWidth;
-    this.windowHeight = windowHeight;
-    this.wallHeight = wallHeight;
+  StateMachine(PApplet applet){
     this.applet = applet;
     
-    this.pc = new PharusClient(applet, wallHeight);
+    this.pc = new PharusClient(applet, WallHeight);
     pc.setMaxAge(50);
     pc.setjumpDistanceMaxTolerance(0.05f); 
   }
