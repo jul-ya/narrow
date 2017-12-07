@@ -1,19 +1,21 @@
 import de.looksgood.ani.*;
 float alpha = 255;
 
+PharusClient pc;
+
 class StateMachine {
   
   State currentState;
   State newState;
   
-  public PharusClient pc;
+  //public PharusClient pc;
   
   PApplet applet;
   
   StateMachine(PApplet applet){
     this.applet = applet;
     
-    this.pc = new PharusClient(applet, WallHeight);
+    pc = new PharusClient(applet, WallHeight);
     pc.setMaxAge(50);
     pc.setjumpDistanceMaxTolerance(0.05f); 
   }
@@ -65,3 +67,18 @@ class StateMachine {
     Ani.to(applet, time, "alpha", 255);
   }
 }
+
+  
+void pharusPlayerAdded(Player player)
+  {
+    println("Player " + player.id + " added");
+    
+    // TODO do something here if needed
+  }
+  
+  void pharusPlayerRemoved(Player player)
+  {
+    println("Player " + player.id + " removed");
+    
+    // TODO do something here if needed  
+  }

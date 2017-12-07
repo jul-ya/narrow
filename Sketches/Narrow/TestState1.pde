@@ -54,12 +54,22 @@ public class TestState1 extends State{
   
   void attractNodes(){
    
+    
+    
     for(int i = 0; i < attractors.size(); i++)
     {
       Attractor a = attractors.get(i);
-      a.x = mouseX;
-      a.y = mouseY; //<>//
-      
+      //Iterate over all Players
+      for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet()) 
+      {
+         Player p = playersEntry.getValue();
+         if(p.id == a.id)
+         {
+          a.x = p.x;
+          a.y = p.y;
+         }
+      }
+       //<>//
       for(int j = 0; j < nodes.size(); j++)
       {
         Node n = nodes.get(j);
@@ -70,10 +80,11 @@ public class TestState1 extends State{
   }
   
   void createAttractor(){
-   
-    for(int i = 0; i < aCount; i++)
+   for (HashMap.Entry<Long, Player> playersEntry : pc.players.entrySet())  //<>//
     {
-      attractors.add(new Attractor(0,0));
+      Player p = playersEntry.getValue();
+      
+      attractors.add(new Attractor(p.x,p.y,p.id));
     }
   
   }
@@ -90,7 +101,5 @@ public class TestState1 extends State{
         }
       }
     }
-    
-    
   }
 }
