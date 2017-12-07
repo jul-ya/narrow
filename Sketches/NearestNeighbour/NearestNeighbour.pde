@@ -42,7 +42,7 @@ void connect(){
     // TODO Insert Loop for Max Connections
     if(c.getNeighbours().size() < maxConnections){
       for(int j= 0; j < points.size(); j++){
-          if(i!=j){//DOnt check the same Point   
+          if(i!=j){//Dont check the same Point   
             CPoint o = points.get(j); //Get the other Point
             if(!c.isNeighbour(o)){  //Check if current Point isnt already a Neighbour of the Current outer Point
                float dist = c.pos.dist(o.pos);

@@ -72,7 +72,7 @@ class CPoint extends PVector{
   
   //Display
    void setSize(int size){
-     this.size = size; 
+     this.pSize = size; 
   } 
   
   void addToVisited(CPoint point){
