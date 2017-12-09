@@ -17,11 +17,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class Node extends PVector {
+class Node {
 
   // velocity
   PVector velocity = new PVector();
-
+  float x = 0;
+  float y = 0;
   // minimum and maximum posiions
   float minX=5, minY=5, maxX=width-5, maxY=height-5;
 
@@ -29,12 +30,12 @@ class Node extends PVector {
   float damping = .01;
   
   // radius of impact
-  float radius = 30;
+  
   // strength: positive for attraction, negative for repulsion
-  float strength = 1;  
+  float strength = 2;  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
-  float minDist = 30;
+  float minDist = 40;
 
   Node(float theX, float theY) {
     x = theX;
@@ -73,20 +74,26 @@ class Node extends PVector {
     
     float dx = x - theNode.x;
     float dy = y - theNode.y;
-    float d = pow(dx,2) + pow(dy,2);
+    float d = mag(dx, dy);
     
     
-    if(d < pow(minDist,2))
+    if(d < minDist)
     {
-        // calculate force
-      float s = d/radius;
+      // calculate force
+     
+      float s = d/minDist;
+    
       float f = (1 / pow(s, 0.5*ramp) - 1);
-      f = strength * f/radius;
-
-      // apply force to node velocity
-      theNode.x += dx * f;
-      theNode.y += dy * f;
+      f = noise(theNode.x,theNode.y) * 0.5 +  strength * f/minDist ;
+      
+      //Apply Force
+      //theNode.x -= dx * f;
+      //theNode.y -= dy * f;
+      theNode.velocity.x -= dx * f * damping;
+      theNode.velocity.y -= dy * f * damping;
+           
     }
+
      
   }
 }

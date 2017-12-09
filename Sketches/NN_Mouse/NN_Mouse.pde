@@ -2,8 +2,8 @@
 import java.util.*;
 
 //****************CONFIG********************
-float sd_y = 20;  //Standard Deviation X
-float sd_x = 20; //Standard Deviation Y
+float sd_y = 50;  //Standard Deviation X
+float sd_x = 50; //Standard Deviation Y
 
 int numPoints = 30;
 float maxConnections = 3;
@@ -16,7 +16,6 @@ int alpha = 150;
 
 
 //PlayerPoints
-//
 
 Attractor player;
 ArrayList<Node> playerNodes = new ArrayList<Node>();
@@ -43,7 +42,10 @@ void draw()
       
       drawPoints();
       
-      connect();
+      //TODO
+      //MOVE CPOINT TO NODE
+      
+      //connect();
       //displayConnections();
     }
 }
@@ -51,14 +53,19 @@ void draw()
 
 void updatePoints()
 {
+  //Update Player Vis
+   Node playerPoint = playerNodes.get(0);
+   playerPoint.x = mouseX;
+   playerPoint.y = mouseY;
    
-   for(int i = 0; i <  playerNodes.size(); i++)
+   //Update All other Points
+   for(int i = 1; i <  playerNodes.size(); i++)
    {
      Node n = playerNodes.get(i);
      player.attract(n);  
-     
+   
      //Push myself away from other nodes
-     for(int j = 0; j < playerNodes.size(); j++){
+     for(int j=1; j < playerNodes.size(); j++){
        if(i!=j){
         n.deflect(playerNodes.get(j));
        }
@@ -72,11 +79,10 @@ void init()
 {
   //Create Player Attractor
   player = new Attractor(mouseX, mouseY);
-
   //Create Points around Player
   playerNodes.clear();
   createRandomStartNodes();
-
+  
   running = true;
 }
 
@@ -89,6 +95,7 @@ void createRandomStartNodes(){
   float start_x, start_y;
   
   //Create
+  playerNodes.add(new Node(mouseX, mouseY));
   Random generator = new Random();
   for (int i = 0; i < numPoints; i++) {
       //Gen X-Coord
@@ -102,7 +109,6 @@ void createRandomStartNodes(){
   }
 }
 
-float pMinDist = 15;
 
 void updatePlayer(){
   
@@ -112,7 +118,6 @@ void updatePlayer(){
 
 
 void drawPoints(){
-  
   for(int i = 0; i < playerNodes.size(); i++)
   {
     Node n = playerNodes.get(i);
