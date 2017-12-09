@@ -1,3 +1,4 @@
+//Nearest Neighbour State
 public class TestState2 extends State{
   
   public TestState2(StateMachine stateMachine){
@@ -9,20 +10,29 @@ public class TestState2 extends State{
   }
   
   void update(){
-    pg.noStroke();
-    pg.fill(70, 0, 150);
-    pg.rect(0, 0, WindowWidth, WallHeight);
-    pg.fill(150);
+  
+    drawPlayerGrid();
   }
   
   void exitTransition(State to, float time) {
     println("exit " + this.getClass().getName());
   }
   
+  
+  void drawPlayerGrid()
+  {
+      //Do Something
+    
+  }
+  
+    
   void playerAdded(Player player){
+    //nnMap.put(player, new Attractor(player.x, player.y));
+    //Just add one Player
   }
   
   void playerRemoved(Player player){
+    //nnMap.remove(player);
   }
   
 }

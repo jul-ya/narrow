@@ -7,9 +7,6 @@ class StateMachine {
   
   State currentState;
   State newState;
-  
-  //public PharusClient pc;
-  
   PApplet applet;
   
   StateMachine(PApplet applet){
