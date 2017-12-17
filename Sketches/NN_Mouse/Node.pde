@@ -28,14 +28,18 @@ class Node {
 
   // damping of the velocity (0 = no damping, 1 = full damping)
   float damping = .01;
-  
-  // radius of impact
-  
+
   // strength: positive for attraction, negative for repulsion
   float strength = 2;  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
   float minDist = 40;
+  
+  int numConnections = 0;
+  ArrayList<Node> neighbours = new ArrayList<Node>(0);
+  
+  //For Drawing
+  ArrayList<Node> visited = new ArrayList<Node>(0); 
 
   Node(float theX, float theY) {
     x = theX;
@@ -87,13 +91,59 @@ class Node {
       f = noise(theNode.x,theNode.y) * 0.5 +  strength * f/minDist ;
       
       //Apply Force
-      //theNode.x -= dx * f;
-      //theNode.y -= dy * f;
       theNode.velocity.x -= dx * f * damping;
       theNode.velocity.y -= dy * f * damping;
            
     }
-
-     
   }
+  
+  void setVelocity(PVector v){
+   this.velocity = v; 
+  }
+  
+  void setDamping(float d){
+   this.damping = d; 
+  }
+  
+  void addConnection(){
+    numConnections+=1;
+  }
+  
+  int getNumConnections(){
+    return this.numConnections;
+  }
+  
+  ArrayList<Node> getNeighbours(){
+   return this.neighbours; 
+  }
+  
+  void addNeighbour(Node n){
+    this.neighbours.add(n);
+  }
+  
+  boolean isNeighbour(Node n){ 
+    for(int i = 0; i < this.neighbours.size(); i++){
+      if(neighbours.get(i)==n)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  
+  void addToVisited(Node n){
+    this.visited.add(n);
+  }
+  
+  boolean isVisited(Node n){ 
+    for(int i = 0; i < this.visited.size(); i++){
+      if(visited.get(i)==n)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
 }

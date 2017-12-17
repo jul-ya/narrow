@@ -25,9 +25,10 @@ class Attractor {
   float radius = 2000;
   // strength: positive for attraction, negative for repulsion
   float strength = 1;  
+  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
- float damping = .1;
+  float damping = .1;
   float minDist = 80;
   
   Attractor(float theX, float theY) {
