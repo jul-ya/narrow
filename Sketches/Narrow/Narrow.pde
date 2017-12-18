@@ -14,6 +14,7 @@ StateMachine stateMachine;
 State testState1;
 State testState2;
 
+SoundInitiator soundInitiator;
 SoundListener soundListener;
 
 void settings()
@@ -34,6 +35,10 @@ void setup()
   textAlign(CENTER, CENTER);
 
   Ani.init(this);
+  
+  soundInitiator = new SoundInitiator();
+  soundListener = new SoundListener();
+  soundInitiator.addListener(soundListener);
   
   stateMachine = new StateMachine(this);
   testState1 = new TestState1(stateMachine);

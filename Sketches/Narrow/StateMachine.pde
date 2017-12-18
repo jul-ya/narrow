@@ -10,7 +10,6 @@ class StateMachine {
   PApplet applet;
   
   boolean stateInit = true;
-  SoundInitiator soundInitiator;
   
   StateMachine(PApplet applet){
     this.applet = applet;
@@ -18,10 +17,6 @@ class StateMachine {
     pc = new PharusClient(applet, WallHeight);
     pc.setMaxAge(50);
     pc.setjumpDistanceMaxTolerance(0.05f);
-    
-    soundInitiator = new SoundInitiator();
-    soundListener = new SoundListener();
-    soundInitiator.addListener(soundListener);
   }
   
   void setState(State state){

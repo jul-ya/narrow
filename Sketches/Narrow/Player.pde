@@ -17,14 +17,23 @@ class Player
   float x; // do not modify this, PharusClient updates it
   float y; // do not modify this, PharusClient updates it
   ArrayList<Foot> feet = new ArrayList<Foot>(); // do not modify this, PharusClient updates it
-
-  // TODO extend this with additional fields
+  
+  boolean isGrounded = true;
 
   // --- Some functions that have information about the player ---
   boolean isJumping()
   {
     // we assume that we jump if we have no feet and update
-    return feet.size() == 0 && age > 1;
+    if(feet.size() == 0 && age > 1){
+      if(isGrounded){
+        soundInitiator.playSound(SoundEvent.Jump);
+        isGrounded = false;
+      }
+      return true;
+    } else {
+      isGrounded = true;
+      return false;
+    }
   }
 
   // handling of path information

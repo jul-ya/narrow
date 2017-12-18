@@ -9,6 +9,10 @@ class SoundListener{
   void playSound(SoundEvent event){
     switch(event){
       case Jump:
+        if(currentState instanceof TestState1)
+          println("play jump " + currentState.getClass().getName());
+        if(currentState instanceof TestState2)
+          println("play jump " + currentState.getClass().getName());
         break;
       case Start:
         if(currentState instanceof TestState1)
