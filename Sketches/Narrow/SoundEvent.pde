@@ -1,0 +1,1 @@
+enum SoundEvent{Jump, Start, End, TriangleCreated, CircleCollapsed};

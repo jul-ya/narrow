@@ -1,4 +1,4 @@
-public abstract class State {
+public abstract class State{
   
   protected StateMachine m;
   public PGraphics pg;

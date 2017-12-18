@@ -14,6 +14,8 @@ StateMachine stateMachine;
 State testState1;
 State testState2;
 
+SoundListener soundListener;
+
 void settings()
 {
   size(WindowWidth, WindowHeight); 
@@ -31,7 +33,6 @@ void setup()
   textFont(font, 18);
   textAlign(CENTER, CENTER);
 
-  //initPlayerTracking();
   Ani.init(this);
   
   stateMachine = new StateMachine(this);
@@ -42,10 +43,7 @@ void setup()
 
 void draw()
 {
-  // clear background with white
   background(255);
-
-  //drawPlayerTracking();
   
   stateMachine.update();
   
@@ -55,18 +53,9 @@ void draw()
 void keyPressed()
 {
   switch(key)
-  {
-  case 'p':
-    ShowPath = !ShowPath; //<>//
-    break;
-  case 't':
-    ShowTrack = !ShowTrack;
-    break;
-  case 'f':
-    ShowFeet = !ShowFeet;
-    break;
+  { //<>//
   case 'x':
-    stateMachine.transitionTo(testState2, 5);
+    stateMachine.transitionTo(testState2, 2);
     break;
   }
 }

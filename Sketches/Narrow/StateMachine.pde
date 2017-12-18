@@ -9,23 +9,36 @@ class StateMachine {
   State newState;
   PApplet applet;
   
+  boolean stateInit = true;
+  SoundInitiator soundInitiator;
+  
   StateMachine(PApplet applet){
     this.applet = applet;
     
     pc = new PharusClient(applet, WallHeight);
     pc.setMaxAge(50);
-    pc.setjumpDistanceMaxTolerance(0.05f); 
+    pc.setjumpDistanceMaxTolerance(0.05f);
+    
+    soundInitiator = new SoundInitiator();
+    soundListener = new SoundListener();
+    soundInitiator.addListener(soundListener);
   }
   
   void setState(State state){
     currentState = state;
     newState = state;
+    soundInitiator.setState(state);
   }
 
   void update() {
     if(alpha == 255){
-      
       currentState = newState;
+      
+      if(stateInit){
+        soundInitiator.setState(currentState);
+        soundInitiator.playSound(SoundEvent.Start);
+        stateInit = false;
+      }
       
       currentState.begin();
       currentState.update();
@@ -44,6 +57,8 @@ class StateMachine {
       image(currentState.pg, 0, 0);
       tint(255, 255 - alpha);
       image(newState.pg, 0, 0);
+      
+      stateInit = true;
     }
   }
   
@@ -59,6 +74,8 @@ class StateMachine {
     this.newState = newState;
     currentState.exitTransition(newState, time);
     newState.enterTransition(currentState, time);
+    
+    soundInitiator.playSound(SoundEvent.End);
     
     alpha = 0;
     Ani.to(applet, time, "alpha", 255);
@@ -82,12 +99,12 @@ class StateMachine {
   
 void pharusPlayerAdded(Player player)
   {
-    println("Player " + player.id + " added");
+    println("player " + player.id + " added");
     stateMachine.playerAdded(player);
   }
   
   void pharusPlayerRemoved(Player player)
   {
-    println("Player " + player.id + " removed");
+    println("player " + player.id + " removed");
     stateMachine.playerRemoved(player); 
   }
