@@ -25,6 +25,7 @@ ArrayList<Node> playerNodes = new ArrayList<Node>(0);
 //Enemy Points
 ArrayList<Node> enemies = new ArrayList<Node>(0);
 
+//Triangles to draw
 ArrayList<Triangle> triangles = new ArrayList<Triangle>(0);
 
 boolean running = false;
@@ -54,14 +55,13 @@ void draw()
       spawnEnemies();
       updateEnemies();
       drawEnemies();
-      
       drawTriangles();
       
     }
 }
 
+
 void spawnEnemies(){
-   
   while(enemies.size() < maxEnemies)
   {
     Node e = new Node(0,0);
@@ -69,8 +69,6 @@ void spawnEnemies(){
     e.setDamping(0);
     enemies.add(e);
   }
-  
-  
 }
 
 
@@ -208,9 +206,6 @@ void updatePoints()
 }
 
 
-
-
-
 //Connect
 void connect(){
   for (int i = 0; i < playerNodes.size(); i++) {
@@ -274,8 +269,6 @@ void display(Node c, Node o)
 }
 
 
-
-
 //**************USER INPUT - DEBUG*************//
 //Start Game
 void mouseClicked(){
@@ -291,72 +284,4 @@ void keyPressed(){
     running = false; 
     background(0);
   }
-}
-
-
-//**************OLD*************//
-//Connect Points
-//void connect(){
-//  for (int i = 0; i < playerPoints.size(); i++) { //<>//
-//    CPoint c = playerPoints.get(i);
-//    float currMinDist = 999999;
-//    int index = 0;
-//    // TODO Insert Loop for Max Connections
-//    if(c.getNeighbours().size() < maxConnections){
-//      for(int j= 0; j < playerPoints.size(); j++){
-//          if(i!=j){//Dont check the same Point   
-//            CPoint o = playerPoints.get(j); //Get the other Point
-//            if(!c.isNeighbour(o)){  //Check if current Point isnt already a Neighbour of the Current outer Point
-//               float dist = c.pos.dist(o.pos);
-//               if(dist < maxConnectWidth){ //Check max Connect Width
-//                 if(dist < currMinDist){  //Check current Iteration Width
-//                   index = j;
-//                   currMinDist = dist;
-//                 } 
-//               }
-//             } 
-//          }       
-//      }
-//      c.addNeighbour(playerPoints.get(index));
-//    }
-//  }  
-//}
-
-
-//void displayConnections(){
-//    //Get all Points
-//    for(int i = 0; i < playerPoints.size(); i++){ //<>//
-//      CPoint c = playerPoints.get(i); //Get First
-//      ArrayList<CPoint> cn = c.getNeighbours();//Iterate over all Neighbours of the current Point
-//      for(int j = 0; j < cn.size(); j++){
-//        CPoint np = cn.get(j);
-//        if(np.isVisited(c) == false){
-//            //Draw 
-//            display(c, np);
-//            //Add both to Visited
-//            np.addToVisited(c);
-//            c.addToVisited(np);
-//          //}
-//        }  
-//      }
-//    }   
-      
-//  }
-
-//void display(CPoint c, CPoint np)
-//{
-//   stroke(255);
-//   fill(255);
-//   ellipse(c.pos.x, c.pos.y, pSize, pSize);
-//   noFill();
-//   float dist = c.pos.dist(np.pos);
-//   stroke(255,255,255,alpha-dist);
-//   line(c.pos.x, c.pos.y, np.pos.x, np.pos.y);
-//}
-
-
-
-
-
-
- 
+} //<>// //<>//

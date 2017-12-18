@@ -79,7 +79,7 @@ public class TestState1 extends State{
     }
   }
   
-  void playerAdded(Player player){
+  void playerAdded(Player player){ 
     attractorMap.put(player, new Attractor(player.x, player.y));
   }
   

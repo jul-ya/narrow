@@ -22,34 +22,60 @@ class Attractor {
   float x=0, y=0; 
 
   // radius of impact
-  float radius = 200;
+  float radius = 2000;
   // strength: positive for attraction, negative for repulsion
   float strength = 1;  
+  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
-
+  float damping = .1;
+  float minDist = 80;
+  
   Attractor(float theX, float theY) {
     x = theX;
     y = theY;
   }
+  
+  
 
 
   void attract(Node theNode) {
     // calculate distance
-    float dx = x - theNode.x;
-    float dy = y - theNode.y;
+    float dx = (x - theNode.x);
+    float dy = (y - theNode.y);
     float d = mag(dx, dy);
 
-    if (d > 0 && d < radius) {
+    if (d > minDist && d < radius ) {
       // calculate force
+      float s = d/radius;
+      float f = (1 / pow(s, 0.5*ramp) - 1);
+      f = strength * f/d;
+      
+      if(f > 1)
+      {
+        f = 1;
+      }
+
+      // apply force to node velocity
+      // theNode.velocity.x += dx * f * damping;
+      //theNode.velocity.y += dy * f * damping;
+      theNode.x += dx * f;
+      theNode.y += dy * f;
+    }
+    else if(d < minDist)
+    {
+        // calculate force
       float s = d/radius;
       float f = (1 / pow(s, 0.5*ramp) - 1);
       f = strength * f/radius;
 
       // apply force to node velocity
-      theNode.velocity.x += dx * f;
-      theNode.velocity.y += dy * f;
+      //theNode.velocity.x -= dx * f * damping;
+      //theNode.velocity.y -= dy * f * damping;
+      theNode.x -= dx * f;
+      theNode.y -= dy * f;
     }
+    
   }
 
 }

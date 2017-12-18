@@ -58,7 +58,7 @@ void draw()
 void keyPressed()
 {
   switch(key)
-  { //<>//
+  { //<>// //<>// //<>//
   case 'x':
     stateMachine.transitionTo(testState2, 2);
     break;

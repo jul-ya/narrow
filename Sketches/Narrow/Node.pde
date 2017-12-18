@@ -17,27 +17,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-class Node extends PVector {
+class Node {
 
   // velocity
   PVector velocity = new PVector();
-
+  float x = 0;
+  float y = 0;
   // minimum and maximum posiions
   float minX=5, minY=5, maxX=width-5, maxY=height-5;
 
   // damping of the velocity (0 = no damping, 1 = full damping)
   float damping = .01;
+
+  // strength: positive for attraction, negative for repulsion
+  float strength = 2;  
+  // parameter that influences the form of the function
+  float ramp = 0.5;    //// 0.01 - 0.99
+  float minDist = 40;
   
-  float initX;
-  float initY;
-  float counter = 0.01;
+  int numConnections = 0;
+  ArrayList<Node> neighbours = new ArrayList<Node>(0);
+  
+  //For Drawing
+  ArrayList<Node> visited = new ArrayList<Node>(0); 
 
   Node(float theX, float theY) {
     x = theX;
     y = theY;
-    initX = theX;
-    initY = theY;
-    
   }
 
   // ------ calculate new position of the node ------
@@ -65,26 +71,79 @@ class Node extends PVector {
 
     velocity.x *= (1-damping);
     velocity.y *= (1-damping);
-    
-    //CounterVelocity - Back to Origin Point
-    if(x > initX){
-      float distX = x - initX;
-      velocity.x -= distX * (counter);      
-    }
-       //CounterVelocity - Back to Origin Point
-    if(x < initX){
-      float distX = initX - x;
-      velocity.x += distX * (counter);      
-    }
-    if(y < initY){
-      float distY = y - initY;
-      velocity.y -= distY * (counter);      
-    }
-    if(y > initY){
-      float distY = initY-y;
-      velocity.y = distY * (counter);      
-    }
-
-    
   }
+  
+  //Push away other Nodes
+  void deflect(Node theNode){
+    
+    float dx = x - theNode.x;
+    float dy = y - theNode.y;
+    float d = mag(dx, dy);
+    
+    
+    if(d < minDist)
+    {
+      // calculate force
+     
+      float s = d/minDist;
+    
+      float f = (1 / pow(s, 0.5*ramp) - 1);
+      f = noise(theNode.x,theNode.y) * 0.5 +  strength * f/minDist ;
+      
+      //Apply Force
+      theNode.velocity.x -= dx * f * damping;
+      theNode.velocity.y -= dy * f * damping;
+           
+    }
+  }
+  
+  void setVelocity(PVector v){
+   this.velocity = v; 
+  }
+  
+  void setDamping(float d){
+   this.damping = d; 
+  }
+  
+  void addConnection(){
+    numConnections+=1;
+  }
+  
+  int getNumConnections(){
+    return this.numConnections;
+  }
+  
+  ArrayList<Node> getNeighbours(){
+   return this.neighbours; 
+  }
+  
+  void addNeighbour(Node n){
+    this.neighbours.add(n);
+  }
+  
+  boolean isNeighbour(Node n){ 
+    for(int i = 0; i < this.neighbours.size(); i++){
+      if(neighbours.get(i)==n)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  
+  void addToVisited(Node n){
+    this.visited.add(n);
+  }
+  
+  boolean isVisited(Node n){ 
+    for(int i = 0; i < this.visited.size(); i++){
+      if(visited.get(i)==n)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+  
 }
