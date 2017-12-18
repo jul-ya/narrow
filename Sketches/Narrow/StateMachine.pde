@@ -42,7 +42,7 @@ class StateMachine {
       newState.end();
       
       image(currentState.pg, 0, 0);
-      tint(255, alpha);
+      tint(255, 255 - alpha);
       image(newState.pg, 0, 0);
     }
   }
