@@ -2,6 +2,7 @@ import de.looksgood.ani.*;
 float alpha = 255;
 
 PharusClient pc;
+HashMap<Player, Attractor> attractorMap = new HashMap<Player, Attractor>();
 
 class StateMachine {
   

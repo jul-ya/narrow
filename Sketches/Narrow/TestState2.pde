@@ -31,8 +31,7 @@ public class TestState2 extends State{
   //Triangles to draw
   ArrayList<Triangle> triangles = new ArrayList<Triangle>(0);
   
-  //PlayerMap
-  HashMap<Player, Attractor> attractorMap = new HashMap<Player, Attractor>();
+  //PlayerMap is global now (StateMachine)
   
 
   public TestState2(StateMachine stateMachine){
@@ -105,8 +104,6 @@ public class TestState2 extends State{
     createRandomStartNodes();
     running = true;
   }
-  
-  
   
   //Creating Gaussian Random Start Points
   //TODO Transfer TUIO DATA

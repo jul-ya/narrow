@@ -10,7 +10,7 @@ public class TestState1 extends State{
   
   ArrayList<Node> nodes = new ArrayList<Node>(0);
   
-  HashMap<Player, Attractor> attractorMap = new HashMap<Player, Attractor>();
+  //PlayerMap is global now (StateMachine)
   
   public TestState1(StateMachine stateMachine){
     super(stateMachine);
