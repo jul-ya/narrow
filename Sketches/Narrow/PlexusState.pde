@@ -1,6 +1,6 @@
 //Nearest Neighbour State
 //meins - Elmar
-public class TestState2 extends State{
+public class PlexusState extends State{
   
   //****************CONFIG********************
   float sd_y = 50;  //Standard Deviation X
@@ -19,10 +19,6 @@ public class TestState2 extends State{
   
   //****************END CONFIG******************
   boolean running = false;
-  //PlayerPoints
-  Player p; 
-  //Attractor pa;
-  Attractor pa;
   ArrayList<Node> playerNodes = new ArrayList<Node>(0);
   
   //Enemy Points
@@ -34,16 +30,21 @@ public class TestState2 extends State{
   //PlayerMap is global now (StateMachine)
   
 
-  public TestState2(StateMachine stateMachine){
+  public PlexusState(StateMachine stateMachine){
     super(stateMachine);
   }
   
   void enterTransition(State from, float time) {
     println("enter " + this.getClass().getName());
-    init();
   }
   
   void update(){
+    
+    super.update();
+    
+    if(!running)
+      init();
+      
     smooth();
     noFill();
     stroke(255);
@@ -71,17 +72,6 @@ public class TestState2 extends State{
     println("exit " + this.getClass().getName());
   }
   
-  void playerAdded(Player player){
-    attractorMap.put(player, new Attractor(player.x, player.y));
-    if(attractorMap.size() == 1){
-      init();
-    }
-  }
-  
-  void playerRemoved(Player player){
-    attractorMap.remove(player);
-  }
-  
   
   
   //**************INIT*************//
@@ -90,15 +80,6 @@ public class TestState2 extends State{
   //TODO -> Transfer TUIO-Data
   void init()
   {
-    //Create Player Attractor
-      
-    for(HashMap.Entry<Player, Attractor> entry : attractorMap.entrySet())
-    {
-      p = entry.getKey();
-      pa = entry.getValue();
-      break;
-    }
-
     //Clear and Create Points around Player
     playerNodes.clear();
     createRandomStartNodes();
@@ -110,12 +91,12 @@ public class TestState2 extends State{
   void createRandomStartNodes(){
     //Helpers
     float num = 0f;
-    float mean_x = p.x;  //TODO TUIO
-    float mean_y = p.y;  //TODO TUIO
+    float mean_x = curPlayer.x;  //TODO TUIO
+    float mean_y = curPlayer.y;  //TODO TUIO
     float start_x, start_y;
     
     //Create
-    playerNodes.add(new Node(p.x, p.y)); //TODO TUIO
+    playerNodes.add(new Node(curPlayer.x, curPlayer.y)); //TODO TUIO
     Random generator = new Random();
     for (int i = 0; i < numPoints; i++) {
         //Gen X-Coord
@@ -201,8 +182,8 @@ public class TestState2 extends State{
   //Update Player Position 
   //TODO -> Transfer TUIO Player Data to here
   void updatePlayer(){
-    pa.x = p.x; 
-    pa.y = p.y;
+    curAttractor.x = curPlayer.x; 
+    curAttractor.y = curPlayer.y;
   }
   
   
@@ -211,14 +192,14 @@ public class TestState2 extends State{
   {
     //Update Player Vis
      Node playerPoint = playerNodes.get(0);
-     playerPoint.x = p.x;
-     playerPoint.y = p.y;
+     playerPoint.x = curPlayer.x;
+     playerPoint.y = curPlayer.y;
      
      //Update All other Points
      for(int i = 1; i <  playerNodes.size(); i++)
      {
        Node n = playerNodes.get(i);
-       pa.attract(n);  
+       curAttractor.attract(n);  
      
        //Push myself away from other nodes
        for(int j=1; j < playerNodes.size(); j++){
