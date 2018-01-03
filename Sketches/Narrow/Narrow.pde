@@ -11,8 +11,6 @@ boolean ShowPath = true;
 boolean ShowFeet = true;
 
 StateMachine stateMachine;
-State circleState;
-State plexusState;
 
 SoundInitiator soundInitiator;
 SoundListener soundListener;
@@ -41,9 +39,7 @@ void setup()
   soundInitiator.addListener(soundListener);
   
   stateMachine = new StateMachine(this);
-  circleState = new CircleState(stateMachine);
-  plexusState = new PlexusState(stateMachine);
-  stateMachine.setState(circleState);
+  stateMachine.setState(new CircleState(stateMachine));
 }
 
 void draw()
@@ -60,10 +56,10 @@ void keyPressed()
   switch(key)
   { //<>// //<>// //<>//
   case 'x':
-    stateMachine.transitionTo(plexusState, 2);
+    stateMachine.transitionTo(new PlexusState(stateMachine), 2);
     break;
   case 'y':
-    stateMachine.transitionTo(circleState, 2);
+    stateMachine.transitionTo(new CircleState(stateMachine), 2);
     break;
   }
 }
