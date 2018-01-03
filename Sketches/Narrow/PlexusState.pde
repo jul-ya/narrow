@@ -91,12 +91,18 @@ public class PlexusState extends State{
   void createRandomStartNodes(){
     //Helpers
     float num = 0f;
-    float mean_x = curPlayer.x;  //TODO TUIO
-    float mean_y = curPlayer.y;  //TODO TUIO
+    float mean_x = 0;  //TODO TUIO
+    float mean_y = 0;
+    if(curPlayer != null){
+      mean_x = curPlayer.x;  //TODO TUIO
+      mean_y = curPlayer.y;  //TODO TUIO
+    }
     float start_x, start_y;
     
     //Create
-    playerNodes.add(new Node(curPlayer.x, curPlayer.y)); //TODO TUIO
+    if(curPlayer != null){
+      playerNodes.add(new Node(curPlayer.x, curPlayer.y)); //TODO TUIO
+    }
     Random generator = new Random();
     for (int i = 0; i < numPoints; i++) {
         //Gen X-Coord
@@ -182,33 +188,37 @@ public class PlexusState extends State{
   //Update Player Position 
   //TODO -> Transfer TUIO Player Data to here
   void updatePlayer(){
-    curAttractor.x = curPlayer.x; 
-    curAttractor.y = curPlayer.y;
+    if(curAttractor != null){
+      curAttractor.x = curPlayer.x; 
+      curAttractor.y = curPlayer.y;
+    }
   }
   
   
   //Update Points to Player Pos
   void updatePoints()
   {
-    //Update Player Vis
-     Node playerPoint = playerNodes.get(0);
-     playerPoint.x = curPlayer.x;
-     playerPoint.y = curPlayer.y;
+     if(curPlayer != null){ 
+      //Update Player Vis
+       Node playerPoint = playerNodes.get(0);
+       playerPoint.x = curPlayer.x;
+       playerPoint.y = curPlayer.y;
      
-     //Update All other Points
-     for(int i = 1; i <  playerNodes.size(); i++)
-     {
-       Node n = playerNodes.get(i);
-       curAttractor.attract(n);  
-     
-       //Push myself away from other nodes
-       for(int j=1; j < playerNodes.size(); j++){
-         if(i!=j){
-          n.deflect(playerNodes.get(j));
+       //Update All other Points
+       for(int i = 1; i <  playerNodes.size(); i++)
+       {
+         Node n = playerNodes.get(i);
+         curAttractor.attract(n);
+       
+         //Push myself away from other nodes
+         for(int j=1; j < playerNodes.size(); j++){
+           if(i!=j){
+            n.deflect(playerNodes.get(j));
+           }
          }
+         //Write Vel to Node
+         n.update();
        }
-       //Write Vel to Node
-       n.update();
      }
   }
   

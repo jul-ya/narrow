@@ -62,5 +62,8 @@ void keyPressed()
   case 'x':
     stateMachine.transitionTo(plexusState, 2);
     break;
+  case 'y':
+    stateMachine.transitionTo(circleState, 2);
+    break;
   }
 }
