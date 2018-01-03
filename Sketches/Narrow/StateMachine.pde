@@ -11,6 +11,7 @@ class StateMachine {
   PApplet applet;
   
   boolean stateInit = true;
+  boolean alphaInverse = false;
   
   StateMachine(PApplet applet){
     this.applet = applet;
@@ -51,7 +52,12 @@ class StateMachine {
       newState.end();
       
       image(currentState.pg, 0, 0);
-      tint(255, 255 - alpha);
+      
+      if(alphaInverse)
+        tint(255, 255 - alpha);
+      else
+        tint(255, alpha); 
+       
       image(newState.pg, 0, 0);
       
       stateInit = true;
@@ -66,8 +72,10 @@ class StateMachine {
    return currentState == state;
   }
 
-  void transitionTo(State newState, float time) {
+  void transitionTo(State newState, float time, boolean alphaInverse) {
+    if(alpha == 255){
     this.newState = newState;
+    this.alphaInverse = alphaInverse;
     currentState.exitTransition(newState, time);
     newState.enterTransition(currentState, time);
     
@@ -75,6 +83,9 @@ class StateMachine {
     
     alpha = 0;
     Ani.to(applet, time, "alpha", 255);
+    } else {
+      println("state machine is currently in transition");
+    }
   }
   
   void playerAdded(Player player){
