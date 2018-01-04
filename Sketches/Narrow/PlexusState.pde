@@ -45,14 +45,14 @@ public class PlexusState extends State{
     if(!running)
       init();
       
-    smooth();
-    noFill();
-    stroke(255);
+    pg.smooth();
+    pg.noFill();
+    pg.stroke(255);
     //If Game has started
     if(running)
     { 
       //Just to See if Game is running
-      background(100);
+      pg.background(100);
       
       updatePlayer();
       updatePoints();
@@ -163,12 +163,12 @@ public class PlexusState extends State{
   
   void drawEnemies()
   {
-      stroke(255,0,0);
-      fill(255,0,0);
+      pg.stroke(255,0,0);
+      pg.fill(255,0,0);
       for(int i = 0; i < enemies.size(); i++)
       {
         Node e = enemies.get(i);
-        ellipse(e.x, e.y, pSize, pSize);
+        pg.ellipse(e.x, e.y, pSize, pSize);
       }
       
   }
@@ -178,7 +178,7 @@ public class PlexusState extends State{
       for( int i = 0; i < triangles.size(); i++)
       {
         Triangle t = triangles.get(i);
-        t.paint();
+        t.paint(pg);
       }
       
   }
@@ -276,13 +276,13 @@ public class PlexusState extends State{
   
   void display(Node c, Node o)
   {
-     stroke(255);
-     fill(255);
-     ellipse(c.x, c.y, pSize, pSize);
-     noFill();
+     pg.stroke(255);
+     pg.fill(255);
+     pg.ellipse(c.x, c.y, pSize, pSize);
+     pg.noFill();
      float dist = dist(c.x, c.y, o.x,o.y);
-     stroke(255,255,255,alpha-dist);
-     line(c.x, c.y, o.x, o.y);
+     pg.stroke(255,255,255,alpha-dist);
+     pg.line(c.x, c.y, o.x, o.y);
   }
   
 }

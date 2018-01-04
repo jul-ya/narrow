@@ -56,10 +56,10 @@ void keyPressed()
   switch(key)
   { //<>// //<>// //<>//
   case 'x':
-    stateMachine.transitionTo(new PlexusState(stateMachine), 2, true);
+    stateMachine.transitionTo(new PlexusState(stateMachine), 2);
     break;
   case 'y':
-    stateMachine.transitionTo(new CircleState(stateMachine), 2, false);
+    stateMachine.transitionTo(new CircleState(stateMachine), 2);
     break;
   }
 }

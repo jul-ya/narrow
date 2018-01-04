@@ -11,7 +11,6 @@ class StateMachine {
   PApplet applet;
   
   boolean stateInit = true;
-  boolean alphaInverse = false;
   
   StateMachine(PApplet applet){
     this.applet = applet;
@@ -52,12 +51,7 @@ class StateMachine {
       newState.end();
       
       image(currentState.pg, 0, 0);
-      
-      if(alphaInverse)
-        tint(255, 255 - alpha);
-      else
-        tint(255, alpha); 
-       
+      tint(255, alpha); 
       image(newState.pg, 0, 0);
       
       stateInit = true;
@@ -72,14 +66,13 @@ class StateMachine {
    return currentState == state;
   }
 
-  void transitionTo(State newState, float time, boolean alphaInverse) {
+  void transitionTo(State newState, float time) {
     if(alpha == 255){
     this.newState = newState;
-    this.alphaInverse = alphaInverse;
     currentState.exitTransition(newState, time);
-    newState.enterTransition(currentState, time);
-    
     soundInitiator.playSound(SoundEvent.End);
+    
+    newState.enterTransition(currentState, time);
     
     alpha = 0;
     Ani.to(applet, time, "alpha", 255);
