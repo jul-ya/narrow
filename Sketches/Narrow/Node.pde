@@ -33,7 +33,7 @@ class Node {
   float strength = 2;  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
-  float minDist = 20;
+  float minDist = 75/shrink;
   
   int numConnections = 0;
   ArrayList<Node> neighbours = new ArrayList<Node>(0);

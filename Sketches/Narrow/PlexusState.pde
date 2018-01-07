@@ -20,8 +20,8 @@ public class PlexusState extends State{
   float enemyCreationRadius = 1000;
   
   //Size
-  int pSize = 3;
-  int eSize = 5;
+  int pSize = 15/shrink;
+  int eSize = 25/shrink;
   int lineWeight = 15/shrink;
   //****************END CONFIG******************
   boolean running = false;
@@ -34,8 +34,6 @@ public class PlexusState extends State{
   ArrayList<Triangle> triangles = new ArrayList<Triangle>(0);
   
   //PlayerMap is global now (StateMachine)
-  
-
   public PlexusState(StateMachine stateMachine){
     super(stateMachine);
   }
