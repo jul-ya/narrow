@@ -75,7 +75,7 @@ public class CircleState extends State {
       circleColor = color(circleRed, 0, 0);
       
       pg.fill(circleColor);
-      pg.ellipse(curPlayer.x, curPlayer.y, circleSize, circleSize);
+      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize, circleSize);
     }
   }
   
