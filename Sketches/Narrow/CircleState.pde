@@ -35,12 +35,11 @@ public class CircleState extends State {
     super.update();
     pg.background(255);
     pg.smooth();
-    pg.noStroke();
     
     if(curPlayer != null){
       
-      /*if(circleSize <= 50/shrink)
-        stateMachine.transitionTo(new PlexusState(stateMachine), 2);*/
+      if(circleSize <= circleSizeStateChange/shrink && !circleStateDebug)
+        stateMachine.transitionTo(new PlexusState(stateMachine), 2);
       
       if(!startEncircle){
         if(sizeAni == null || !sizeAni.isPlaying()){
@@ -50,7 +49,7 @@ public class CircleState extends State {
         }
       }
       
-      if(circleSize < 300/shrink && !startColorize){
+      if(circleSize < circleSizeColorChange/shrink && !startColorize){
         if(colorAni == null || !colorAni.isPlaying()){
           if(colorAni != null) colorAni.end();
           colorAni = Ani.to(stateMachine.applet, 2, "circleRed", 255);
@@ -61,7 +60,7 @@ public class CircleState extends State {
       curPlayer.isJumping();
       if(!curPlayer.isGrounded)
         grounded = false;
-      if(!grounded && curPlayer.isGrounded && curBounceSize > 0){
+      if(!grounded && curPlayer.isGrounded && curBounceSize > 0 && startColorize){
         grounded = true;
         if(sizeAni != null) sizeAni.end();
         if(colorAni != null) colorAni.end();
@@ -73,6 +72,12 @@ public class CircleState extends State {
       }
         
       circleColor = color(circleRed, 0, 0);
+      
+      pg.noStroke();
+      //pg.stroke(circleColor);
+      //pg.strokeWeight(15/shrink);
+      //pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 100/shrink, circleSize + 100/shrink);
+      //pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 200/shrink, circleSize + 200/shrink);
       
       pg.fill(circleColor);
       pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize, circleSize);
