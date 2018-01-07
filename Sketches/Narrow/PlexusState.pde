@@ -16,7 +16,7 @@ public class PlexusState extends State{
   int alpha = 150;
   int maxEnemies = 4;
   float enemyWidth = 100;
-  float enemySpeed = 10;
+  float enemySpeed = 5;
   float enemyCreationRadius = 1000;
   
   //Size
@@ -101,13 +101,13 @@ public class PlexusState extends State{
     float mean_y = 0;
     if(curPlayer != null){
       mean_x = curPlayer.x;  //TODO TUIO
-      mean_y = curPlayer.y;  //TODO TUIO
+      mean_y = curPlayer.y-WallHeight;  //TODO TUIO
     }
     float start_x, start_y;
     
     //Create
     if(curPlayer != null){
-      playerNodes.add(new Node(curPlayer.x, curPlayer.y)); //TODO TUIO
+      playerNodes.add(new Node(curPlayer.x, curPlayer.y-WallHeight)); //TODO TUIO
     }
     Random generator = new Random();
     for (int i = 0; i < numPoints; i++) {
@@ -143,7 +143,6 @@ public class PlexusState extends State{
 
 
   void updateEnemies(){
-    
     for(int i = 0; i < enemies.size(); i++)
     {
       Node e = enemies.get(i);
@@ -204,7 +203,7 @@ public class PlexusState extends State{
   void updatePlayer(){
     if(curAttractor != null){
       curAttractor.x = curPlayer.x; 
-      curAttractor.y = curPlayer.y;
+      curAttractor.y = curPlayer.y-WallHeight;
     }
   }
   
