@@ -11,8 +11,8 @@ public class CircleState extends State {
   boolean grounded = true;
   Ani colorAni;
   Ani sizeAni;
-  float curBounceSize = circleSize/2;
-  float bounceDecreaser = circleSize/10;
+  public float curBounceSize = circleSize/2;
+  public float bounceDecreaser = circleSize/10;
   
   public CircleState(StateMachine stateMachine){
     super(stateMachine);

@@ -28,7 +28,7 @@ class SoundListener{
         break;
       case TriangleCreated:
         break;
-      case CircleCollapsed:
+      default:
         break;
     }
   };
