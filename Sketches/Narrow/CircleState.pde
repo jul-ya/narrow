@@ -11,8 +11,8 @@ public class CircleState extends State {
   boolean grounded = true;
   Ani colorAni;
   Ani sizeAni;
-  public float curBounceSize = circleSize/2;
-  public float bounceDecreaser = circleSize/10;
+  public float curBounceSize = circleSize/2f;
+  public float bounceDecreaser = circleSize/10f;
   
   public CircleState(StateMachine stateMachine){
     super(stateMachine);
@@ -20,6 +20,10 @@ public class CircleState extends State {
   
   void enterTransition(State from, float time) {
     println("enter " + this.getClass().getName());
+    init();
+  }
+  
+  void init(){
     circleSize = 8000/shrink;
     circleRed = 0;
     startEncircle = false;
@@ -28,31 +32,32 @@ public class CircleState extends State {
     grounded = true;
     colorAni = null;
     sizeAni = null;
-    curBounceSize = circleSize;
+    curBounceSize = circleSize/2;
   }
   
   void update(){
     super.update();
     pg.background(255);
     pg.smooth();
+    pg.noStroke();
     
     if(curPlayer != null){
       
-      if(circleSize <= circleSizeStateChange/shrink && !circleStateDebug)
+      if(circleSize <= 0 && !circleStateDebug)
         stateMachine.transitionTo(new PlexusState(stateMachine), 2);
       
       if(!startEncircle){
         if(sizeAni == null || !sizeAni.isPlaying()){
           if(sizeAni != null) sizeAni.end();
-          sizeAni = Ani.to(stateMachine.applet, 5, "circleSize", 0/shrink, Ani.SINE_OUT);
+          sizeAni = Ani.to(stateMachine.applet, circleShrinkTime, "circleSize", 0, Ani.SINE_OUT);
           startEncircle = true;
         }
       }
       
-      if(circleSize < circleSizeColorChange/shrink && !startColorize){
+      if(circleSize < circleSizeColorChange && !startColorize){
         if(colorAni == null || !colorAni.isPlaying()){
           if(colorAni != null) colorAni.end();
-          colorAni = Ani.to(stateMachine.applet, 2, "circleRed", 255);
+          colorAni = Ani.to(stateMachine.applet, circleShrinkTime/5f, "circleRed", 255);
           startColorize = true;
         }
       }
@@ -60,24 +65,27 @@ public class CircleState extends State {
       curPlayer.isJumping();
       if(!curPlayer.isGrounded)
         grounded = false;
-      if(!grounded && curPlayer.isGrounded && curBounceSize > 0 && startColorize){
+      if(!grounded && curPlayer.isGrounded && curBounceSize > 0){
         grounded = true;
-        if(sizeAni != null) sizeAni.end();
-        if(colorAni != null) colorAni.end();
-        sizeAni = Ani.to(stateMachine.applet, 1, "circleSize", curBounceSize, Ani.QUART_IN);
-        colorAni = Ani.to(stateMachine.applet, 1, "circleRed", 0);
-        startColorize = false;
-        startEncircle = false;
-        curBounceSize -= bounceDecreaser;
+        if(startColorize){
+          if(sizeAni != null) sizeAni.end();
+          if(colorAni != null) colorAni.end();
+          sizeAni = Ani.to(stateMachine.applet, circleBounceTime, "circleSize", curBounceSize, Ani.QUART_IN);
+          colorAni = Ani.to(stateMachine.applet, circleBounceTime, "circleRed", 0);
+          startColorize = false;
+          startEncircle = false;
+          curBounceSize -= bounceDecreaser;
+        }
       }
         
       circleColor = color(circleRed, 0, 0);
       
-      pg.noStroke();
-      //pg.stroke(circleColor);
-      //pg.strokeWeight(15/shrink);
-      //pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 100/shrink, circleSize + 100/shrink);
-      //pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 200/shrink, circleSize + 200/shrink);
+      /*pg.stroke(circleColor);
+      pg.strokeWeight(40/shrink * circleSize/(8000/shrink));
+      pg.noFill();
+      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 100/shrink, circleSize + 100/shrink);
+      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 200/shrink, circleSize + 200/shrink);
+      pg.noStroke();*/
       
       pg.fill(circleColor);
       pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize, circleSize);
