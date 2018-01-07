@@ -16,15 +16,17 @@ class Triangle{
   
   void paint(PGraphics pg){
      randomSeed(this.seed);
+     pg.fill(random(0,255));
      pg.beginShape();
      pg.fill(random(50,255));
      pg.vertex(p1.x,p1.y);
-     pg.fill(random(50,255));
+     pg.fill(random(50,255)-50);
      pg.vertex(p2.x,p2.y);
-     pg.fill(random(50,255));
+     pg.fill(random(50,255)+10);
      pg.vertex(p3.x,p3.y);
      pg.endShape();
-     //pg.triangle(p1.x,p1.y,p2.x,p2.y, p3.x,p3.y);
+     
+ 
 
   }
   

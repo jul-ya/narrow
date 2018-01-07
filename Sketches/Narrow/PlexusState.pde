@@ -20,7 +20,8 @@ public class PlexusState extends State{
   float enemyCreationRadius = 1000;
   
   //Size
-  int pSize = 15/shrink;
+  int pSize = 3;
+  int eSize = 5;
   int lineWeight = 15/shrink;
   //****************END CONFIG******************
   boolean running = false;
@@ -181,7 +182,7 @@ public class PlexusState extends State{
       for(int i = 0; i < enemies.size(); i++)
       {
         Node e = enemies.get(i);
-        pg.ellipse(e.x, e.y, pSize, pSize);
+        pg.ellipse(e.x, e.y, eSize, eSize);
       }
       
   }
