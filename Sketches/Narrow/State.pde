@@ -28,6 +28,10 @@ public abstract class State{
   }
   
   void end(){
+    if(showFrameRate){
+      pg.fill(255,0,0);
+      pg.text((int)frameRate + " FPS", 0, 10);
+    }
     pg.endDraw();
   }
   

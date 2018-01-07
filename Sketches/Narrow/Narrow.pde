@@ -1,10 +1,11 @@
-float cursor_size = 25;
 PFont font;
 
+// GENERAL CONFIG
 int shrink = 5;
 int WindowWidth = 3030/shrink; // for real Deep Space this should be 3030
 int WindowHeight = 3712/shrink; // for real Deep Space this should be 3712
 int WallHeight = 1914/shrink; // for real Deep Space this should be 1914 (Floor is 1798)
+boolean showFrameRate = false;
 
 // CONFIG CIRCLE STATE
 float circleSizeColorChange = 300/shrink; // to change when it's time to color the circle red and let the player trigger the bounce (increase circle size again)
@@ -46,17 +47,13 @@ void setup()
 void draw()
 {
   background(255);
-  
   stateMachine.update();
-  
-  fill(255,0,0);
-  text((int)frameRate + " FPS", width / 2, 10);
 }
 
 void keyPressed()
 {
   switch(key)
-  { //<>// //<>// //<>//
+  { //<>//
   case 'x':
     stateMachine.transitionTo(new PlexusState(stateMachine), 2);
     break;
