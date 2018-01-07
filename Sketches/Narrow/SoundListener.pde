@@ -1,6 +1,7 @@
 class SoundListener{
   
   State currentState;
+  AudioTrigger audioTrigger = new AudioTrigger();
   
   void setState(State state){
     this.currentState = state;
@@ -17,12 +18,14 @@ class SoundListener{
       case Start:
         if(currentState instanceof CircleState)
           println("play start " + currentState.getClass().getName());
+          audioTrigger.circleVolumeGain();
         if(currentState instanceof PlexusState)
           println("play start " + currentState.getClass().getName());
         break;
       case End:
         if(currentState instanceof CircleState)
           println("play end " + currentState.getClass().getName());
+          audioTrigger.circleEndTrigger();
         if(currentState instanceof PlexusState)
           println("play end " + currentState.getClass().getName());
         break;

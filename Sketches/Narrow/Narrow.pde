@@ -1,3 +1,11 @@
+//Import Minim Library
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 PFont font;
 
 // GENERAL CONFIG
@@ -30,6 +38,14 @@ StateMachine stateMachine;
 SoundInitiator soundInitiator;
 SoundListener soundListener;
 
+//Initialize Minim Features
+Minim minim;
+FilePlayer filePlayer;
+AudioPlayer song;
+Gain gain;
+AudioOutput out;
+AudioSample snap;
+
 void settings()
 {
   size(WindowWidth, WindowHeight); 
@@ -49,6 +65,7 @@ void setup()
   textAlign(CENTER, CENTER);
 
   Ani.init(this);
+  minim = new Minim(this);
   
   soundInitiator = new SoundInitiator();
   soundListener = new SoundListener();
