@@ -40,7 +40,10 @@ class StateMachine {
       currentState.update();
       currentState.end();
       
-      image(currentState.pg, 0, 0);
+      image(currentState.pg, 0, WallHeight);
+      
+      scale(1, -1);
+      image(currentState.pg, 0, -WallHeight, WindowWidth, WallHeight);
     } else {
       currentState.begin();
       currentState.update();
@@ -50,9 +53,9 @@ class StateMachine {
       newState.update();
       newState.end();
       
-      image(currentState.pg, 0, 0);
+      image(currentState.pg, 0, WallHeight);
       tint(255, alpha); 
-      image(newState.pg, 0, 0);
+      image(newState.pg, 0, WallHeight);
       
       stateInit = true;
     }
