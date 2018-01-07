@@ -24,7 +24,7 @@ class Node {
   float x = 0;
   float y = 0;
   // minimum and maximum posiions
-  float minX=5, minY=5, maxX=width-5, maxY=height-5;
+  float minX=5, minY=5, maxX=WindowWidth-5, maxY=WindowHeight-WallHeight-5;
 
   // damping of the velocity (0 = no damping, 1 = full damping)
   float damping = .01;
@@ -33,7 +33,7 @@ class Node {
   float strength = 2;  
   // parameter that influences the form of the function
   float ramp = 0.5;    //// 0.01 - 0.99
-  float minDist = 40;
+  float minDist = 20;
   
   int numConnections = 0;
   ArrayList<Node> neighbours = new ArrayList<Node>(0);

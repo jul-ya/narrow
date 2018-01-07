@@ -3,8 +3,8 @@
 public class PlexusState extends State{
   
   //****************CONFIG********************
-  float sd_y = 50;  //Standard Deviation X
-  float sd_x = 50; //Standard Deviation Y
+  float sd_y = 15;  //Standard Deviation X
+  float sd_x = 15; //Standard Deviation Y
   
   int numPoints = 30;
   float maxConnections = 5;
@@ -12,14 +12,16 @@ public class PlexusState extends State{
   
   //NEW VARS
   int maxConnectWidth = 500;
-  int pSize = 3;
+  
   int alpha = 150;
   int maxEnemies = 4;
   float enemyWidth = 100;
   float enemySpeed = 10;
   float enemyCreationRadius = 1000;
   
-  int lineWeight = 3;
+  //Size
+  int pSize = 15/shrink;
+  int lineWeight = 15/shrink;
   //****************END CONFIG******************
   boolean running = false;
   ArrayList<Node> playerNodes = new ArrayList<Node>(0);
@@ -56,6 +58,7 @@ public class PlexusState extends State{
     { 
       //Just to See if Game is running
       pg.background(20);
+      
       
       updatePlayer();
       updatePoints();
@@ -174,8 +177,8 @@ public class PlexusState extends State{
   
   void drawEnemies()
   {
-      pg.stroke(255,0,0);
-      pg.fill(255,0,0);
+      pg.noStroke();
+      pg.fill(255, 100);
       for(int i = 0; i < enemies.size(); i++)
       {
         Node e = enemies.get(i);
