@@ -14,9 +14,12 @@ public class PlexusState extends State{
   int maxConnectWidth = 500;
   int pSize = 3;
   int alpha = 150;
-  int maxEnemies = 1;
+  int maxEnemies = 4;
   float enemyWidth = 100;
+  float enemySpeed = 10;
+  float enemyCreationRadius = 1000;
   
+  int lineWeight = 3;
   //****************END CONFIG******************
   boolean running = false;
   ArrayList<Node> playerNodes = new ArrayList<Node>(0);
@@ -52,7 +55,7 @@ public class PlexusState extends State{
     if(running)
     { 
       //Just to See if Game is running
-      pg.background(100);
+      pg.background(20);
       
       updatePlayer();
       updatePoints();
@@ -120,8 +123,16 @@ public class PlexusState extends State{
   void spawnEnemies(){
   while(enemies.size() < maxEnemies)
   {
-    Node e = new Node(0,0);
-    e.setVelocity(new PVector(2,2)); 
+    float x = (float)(enemyCreationRadius * Math.cos(random(6.283185)));
+    float y = (float)(enemyCreationRadius * Math.sin(random(6.283185)));
+    Node e = new Node(x,y);
+    
+    x = width/2 - x;
+    y = height/2 - y;
+    PVector vel = new PVector(x,y);
+    vel.normalize();
+    vel = vel.mult(enemySpeed);
+    e.setVelocity(vel); 
     e.setDamping(0);
     enemies.add(e);
   }
@@ -282,7 +293,9 @@ public class PlexusState extends State{
      pg.noFill();
      float dist = dist(c.x, c.y, o.x,o.y);
      pg.stroke(255,255,255,alpha-dist);
+     pg.strokeWeight(lineWeight);
      pg.line(c.x, c.y, o.x, o.y);
+     pg.strokeWeight(1);
   }
   
 }
