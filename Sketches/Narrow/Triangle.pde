@@ -13,16 +13,18 @@ class Triangle{
     this.seed = int(random(500));
   }
  
-  
+  int currentCol = 255;
   void paint(PGraphics pg){
      randomSeed(this.seed);
-     pg.fill(random(0,255));
+     currentCol = (int)(120 * Math.sin(float(frameCount) * 0.25 * random(1)) + 120.0);
+     pg.fill(currentCol);
+     //pg.fill(random(0,255));
      pg.beginShape();
-     pg.fill(random(50,255));
+     //pg.fill(random(50,255));
      pg.vertex(p1.x,p1.y);
-     pg.fill(random(50,255)-50);
+     //pg.fill(random(50,255)-50);
      pg.vertex(p2.x,p2.y);
-     pg.fill(random(50,255)+10);
+     //pg.fill(random(50,255)+10);
      pg.vertex(p3.x,p3.y);
      pg.endShape();
      

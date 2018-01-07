@@ -6,23 +6,20 @@ public class PlexusState extends State{
   float sd_y = 15;  //Standard Deviation X
   float sd_x = 15; //Standard Deviation Y
   
-  int numPoints = 30;
   float maxConnections = 5;
   float maxDist = 150;
   
   //NEW VARS
   int maxConnectWidth = 500;
-  
-  int alpha = 150;
-  int maxEnemies = 4;
+
   float enemyWidth = 100;
-  float enemySpeed = 5;
+
   float enemyCreationRadius = 1000;
   
-  //Size
-  int pSize = 15/shrink;
-  int eSize = 25/shrink;
-  int lineWeight = 15/shrink;
+  //Graphics
+
+  int alpha = 150;
+  
   //****************END CONFIG******************
   boolean running = false;
   ArrayList<Node> playerNodes = new ArrayList<Node>(0);
@@ -168,15 +165,20 @@ public class PlexusState extends State{
       if(connections > 1)
       {
         triangles.add(new Triangle(new PVector(e.x, e.y), new PVector(playerNodes.get(index1).x, playerNodes.get(index1).y), new PVector(playerNodes.get(index2).x, playerNodes.get(index2).y)));
+        soundInitiator.playSound(SoundEvent.TriangleCreated);
         enemies.remove(i);
       }
     }
   }
   
+  int currentCol = 255;
   void drawEnemies()
   {
       pg.noStroke();
-      pg.fill(255, 100);
+      currentCol = (int)(120 * Math.sin(float(frameCount) * 0.25 ) + 120);
+      
+      pg.fill(currentCol);
+      //pg.fill(255, 100);
       for(int i = 0; i < enemies.size(); i++)
       {
         Node e = enemies.get(i);
