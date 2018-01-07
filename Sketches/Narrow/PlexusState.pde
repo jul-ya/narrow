@@ -65,6 +65,7 @@ public class PlexusState extends State{
       spawnEnemies();
       updateEnemies();
       drawEnemies();
+      updateTriangles();
       drawTriangles();
     }
   
@@ -186,6 +187,17 @@ public class PlexusState extends State{
       }
       
   }
+  
+  void updateTriangles(){
+    
+      for( int i = 0; i < triangles.size(); i++)
+      {
+        Triangle t = triangles.get(i);
+        t.update();
+      }
+      
+  }
+  
   
   void drawTriangles(){
     

@@ -4,6 +4,9 @@ class Triangle{
   PVector p2;
   PVector p3;
   int seed;
+  PVector velocity = new PVector();
+  
+  float randVal = 0.8; 
   
   Triangle(PVector p1, PVector p2, PVector p3)
   {
@@ -11,6 +14,7 @@ class Triangle{
     this.p2 = p2;
     this.p3 = p3;
     this.seed = int(random(500));
+    this.velocity =  new PVector(random(-randVal, randVal), random(-randVal,randVal));
   }
  
   int currentCol = 255;
@@ -18,18 +22,19 @@ class Triangle{
      randomSeed(this.seed);
      currentCol = (int)(120 * Math.sin(float(frameCount) * 0.25 * random(1)) + 120.0);
      pg.fill(currentCol);
-     //pg.fill(random(0,255));
-     pg.beginShape();
-     //pg.fill(random(50,255));
-     pg.vertex(p1.x,p1.y);
-     //pg.fill(random(50,255)-50);
-     pg.vertex(p2.x,p2.y);
-     //pg.fill(random(50,255)+10);
-     pg.vertex(p3.x,p3.y);
-     pg.endShape();
-     
- 
-
+     pg.triangle(p1.x,p1.y,p2.x,p2.y,p3.x,p3.y);
+  }
+  
+    // ------ calculate new position of the node ------
+  void update() {
+      p1.x += velocity.x;
+      p1.y += velocity.y;
+      
+      p2.x += velocity.x;
+      p2.y += velocity.y;
+      
+      p3.x += velocity.x;
+      p3.y += velocity.y;
   }
   
   
