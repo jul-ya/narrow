@@ -38,6 +38,8 @@ public class CircleState extends State {
   void update(){
     super.update();
     pg.background(255);
+    /*pg.fill(255,150);
+    pg.rect(0,0,WindowWidth,WallHeight);*/
     pg.smooth();
     pg.noStroke();
     
@@ -80,12 +82,13 @@ public class CircleState extends State {
         
       circleColor = color(circleRed, 0, 0);
       
-      /*pg.stroke(circleColor);
-      pg.strokeWeight(40/shrink * circleSize/(8000/shrink));
-      pg.noFill();
-      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 100/shrink, circleSize + 100/shrink);
-      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + 200/shrink, circleSize + 200/shrink);
-      pg.noStroke();*/
+      for(int i = 2000; i > 0; i-=200){
+        pg.stroke(circleColor, 255-i/7);
+        pg.strokeWeight((2000-i)/50/shrink * circleSize/(8000/shrink));
+        pg.noFill();
+        pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + i/shrink, circleSize + i/shrink);
+        pg.noStroke();
+      }
       
       pg.fill(circleColor);
       pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize, circleSize);
