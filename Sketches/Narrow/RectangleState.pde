@@ -3,10 +3,6 @@ import de.looksgood.ani.*;
 float rectIncreasePerSecond = 10;
 float rectAlpha = 0;
 
-float rectIncreasePerSecondStart = 10;
-float rectIncreasePerSecondEnd = 1200;
-float rectIncreaseTime = 20f;
-
 public class RectangleState extends State {
   
   boolean white = false;
@@ -38,7 +34,7 @@ public class RectangleState extends State {
     if(curPlayer != null){
       
       if(rectIncreasePerSecond == rectIncreasePerSecondEnd && !stateMachine.stateInit)
-        stateMachine.transitionTo(new PlexusState(stateMachine), 2);
+        stateMachine.transitionTo(new FinalState(stateMachine), 2);
         
       rectSize += rectIncreasePerSecond * deltaTime;
       

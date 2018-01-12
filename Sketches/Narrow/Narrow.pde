@@ -23,12 +23,17 @@ float circleBounceTime = 1f; // time the bounce needs to reach bounce maximum
 boolean circleStateDebug = false; // set true to disable state automatic changing
 
 // CONFIG PLEXUS STATE
-int numPoints = 30;    //number of userpoints - decrease to increase performance
-int maxEnemies = 4;    //number of enemypoints - decrease to increase performance
+int numPoints = 30;    // number of userpoints - decrease to increase performance
+int maxEnemies = 4;    // number of enemypoints - decrease to increase performance
 float enemySpeed = 5;  // number of pixels to move per frame 
-int pSize = 15/shrink;  //size of points
-int eSize = 25/shrink;  //size of enemies
+int pSize = 15/shrink;  // size of points
+int eSize = 25/shrink;  // size of enemies
 int lineWeight = 15/shrink; //linewidth
+
+// CONFIG RECTANGLE STATE
+float rectIncreasePerSecondStart = 10; // the size increase in pixels per second at start
+float rectIncreasePerSecondEnd = 1200; // the size increase in pixels per second at end
+float rectIncreaseTime = 20f; // the time the state lasts
 
 //*******************************
 //END CONFIG
