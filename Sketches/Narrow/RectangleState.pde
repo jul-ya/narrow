@@ -29,7 +29,6 @@ public class RectangleState extends State {
       if(rectSize > WindowWidth*16.5)
         rectSize = WindowWidth;
         
-      println(heightPercentage);
       rectSize += rectIncreasePerSecond * deltaTime;
       
       for(int i = 0; i < 100; i++){
