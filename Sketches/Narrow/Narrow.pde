@@ -6,6 +6,7 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
+float deltaTime;
 PFont font;
 
 // GENERAL CONFIG
@@ -77,6 +78,8 @@ void setup()
 
 void draw()
 {
+  deltaTime = frameRate/1000.0;
+  
   background(255);
   stateMachine.update();
 }
@@ -90,6 +93,9 @@ void keyPressed()
     break;
   case 'y':
     stateMachine.transitionTo(new CircleState(stateMachine), 2);
+    break;
+  case 'z':
+    stateMachine.transitionTo(new RectangleState(stateMachine), 2);
     break;
   }
 }
