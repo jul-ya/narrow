@@ -41,7 +41,7 @@ public class RectangleState extends State {
         float curSize = rectSize-(i*100);
         curSize = max(curSize, 0);
         white = !white;
-        pg.rect(curPlayer.x, curPlayer.y - WallHeight, curSize, curSize*heightPercentage);
+        pg.rect(curPlayer.x - curSize/2,curPlayer.y - WallHeight - curSize*heightPercentage/2, curSize, curSize*heightPercentage);
       }
     }
   }
