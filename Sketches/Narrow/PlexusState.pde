@@ -1,7 +1,7 @@
 //Nearest Neighbour State
 //meins - Elmar
 
-
+public int triangleCount = 0;
 
 
 public class PlexusState extends State{
@@ -24,7 +24,6 @@ public class PlexusState extends State{
 
   int alpha = 150;
   
-  public int triangleCount = 0;
   
 
   //****************END CONFIG******************

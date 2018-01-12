@@ -47,11 +47,12 @@ SoundListener soundListener;
 
 //Initialize Minim Features
 Minim minim;
-FilePlayer filePlayer;
-AudioPlayer song;
-Gain gain;
-AudioOutput out;
+AudioPlayer circleTrack;
+AudioPlayer plexusTrack;
+AudioPlayer rectangleTrack;
 AudioSample snap;
+AudioSample jump;
+AudioPlayer generateTriangle;
 
 void settings()
 {
