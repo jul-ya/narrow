@@ -1,9 +1,9 @@
-import de.looksgood.ani.*;
-
-float rectSize = 0;
-float rectIncreasePerSecond = 300;
-
 public class RectangleState extends State {
+  
+  boolean white = false;
+  float rectSize = 0;
+  float rectIncreasePerSecond = 300;
+  float heightPercentage = (float)(WindowHeight-WallHeight)/(float)WindowWidth;
   
   public RectangleState(StateMachine stateMachine){
     super(stateMachine);
@@ -24,32 +24,26 @@ public class RectangleState extends State {
     pg.smooth();
     pg.noStroke();
     
-    //if(curPlayer != null){
+    if(curPlayer != null){
       
-      /*for(int i = 2000; i > 0; i-=200){
-        pg.stroke(circleColor, 255-i/7);
-        pg.strokeWeight((2000-i)/50/shrink * circleSize/(8000/shrink));
-        pg.noFill();
-        pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize + i/shrink, circleSize + i/shrink);
-        pg.noStroke();
-      }*/
-      boolean white = false;
-      
+      if(rectSize > WindowWidth*1.65)
+        rectSize = WindowWidth;
+        
+      println(heightPercentage);
       rectSize += rectIncreasePerSecond * deltaTime;
-      println(rectSize);
+      
       for(int i = 0; i < 10; i++){
         if(white){
           pg.fill(0);
         } else {
           pg.fill(255);
         }
+        float curSize = rectSize-(i*100);
+        curSize = max(curSize, 0);
         white = !white;
-        pg.rect((WindowWidth/2)-(rectSize/2),((WindowWidth-WallHeight)/2)-(rectSize/2),rectSize,rectSize);
+        pg.rect(curPlayer.x, curPlayer.y - WallHeight, curSize, curSize*heightPercentage);
       }
-      
-      /*pg.fill(circleColor);
-      pg.ellipse(curPlayer.x, curPlayer.y - WallHeight, circleSize, circleSize);*/
-    //}
+    }
   }
   
   void exitTransition(State to, float time) {
