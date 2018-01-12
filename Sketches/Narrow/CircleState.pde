@@ -46,7 +46,7 @@ public class CircleState extends State {
     if(curPlayer != null){
       
       if(circleSize <= 0 && !circleStateDebug && !stateMachine.stateInit)
-        stateMachine.transitionTo(new PlexusState(stateMachine), 2);
+        stateMachine.transitionTo(new PlexusState(stateMachine), 1);
       
       if(!startEncircle){
         if(sizeAni == null || !sizeAni.isPlaying()){

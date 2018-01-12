@@ -34,7 +34,7 @@ public class RectangleState extends State {
     if(curPlayer != null){
       
       if(rectIncreasePerSecond == rectIncreasePerSecondEnd && !stateMachine.stateInit)
-        stateMachine.transitionTo(new FinalState(stateMachine), 2);
+        stateMachine.transitionTo(new FinalState(stateMachine), 1);
         
       rectSize += rectIncreasePerSecond * deltaTime;
       

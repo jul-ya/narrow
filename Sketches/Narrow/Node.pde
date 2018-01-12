@@ -27,12 +27,12 @@ class Node {
   float minX=5, minY=5, maxX=WindowWidth-5, maxY=WindowHeight-WallHeight-5;
 
   // damping of the velocity (0 = no damping, 1 = full damping)
-  float damping = .005;
+  float damping = .0005;
 
   // strength: positive for attraction, negative for repulsion
-  float strength = 2;  
+  float strength = 20;  
   // parameter that influences the form of the function
-  float ramp = 0.5;    //// 0.01 - 0.99
+  float ramp = 0.9;    //// 0.01 - 0.99
   float minDist = 75/shrink;
   
   int numConnections = 0;

@@ -51,6 +51,7 @@ public class PlexusState extends State{
     pg.smooth();
     pg.noFill();
     pg.stroke(255);
+    
   }
   
   void update(){
@@ -76,7 +77,7 @@ public class PlexusState extends State{
       displayConnections();
       
       if(triangleCount > maxTriangles && !stateMachine.stateInit)
-        stateMachine.transitionTo(new RectangleState(stateMachine), 2);
+        stateMachine.transitionTo(new RectangleState(stateMachine), 1);
    
   
   }
@@ -104,8 +105,8 @@ public class PlexusState extends State{
   void createRandomStartNodes(){
     //Helpers
     float num = 0f;
-    float mean_x = 0;  //TODO TUIO
-    float mean_y = 0;
+    float mean_x = WindowWidth/2;  //TODO TUIO
+    float mean_y = (WindowHeight-WallHeight)/2;
     if(curPlayer != null){
       mean_x = curPlayer.x;  //TODO TUIO
       mean_y = curPlayer.y-WallHeight;  //TODO TUIO
