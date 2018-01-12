@@ -26,13 +26,13 @@ public class RectangleState extends State {
     
     if(curPlayer != null){
       
-      if(rectSize > WindowWidth*1.65)
+      if(rectSize > WindowWidth*16.5)
         rectSize = WindowWidth;
         
       println(heightPercentage);
       rectSize += rectIncreasePerSecond * deltaTime;
       
-      for(int i = 0; i < 10; i++){
+      for(int i = 0; i < 100; i++){
         if(white){
           pg.fill(0);
         } else {
