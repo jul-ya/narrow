@@ -53,6 +53,7 @@ AudioPlayer rectangleTrack;
 AudioSample snap;
 AudioSample jump;
 AudioPlayer generateTriangle;
+AudioPlayer noise;
 
 void settings()
 {

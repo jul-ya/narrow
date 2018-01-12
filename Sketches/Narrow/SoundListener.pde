@@ -43,7 +43,7 @@ class SoundListener{
         }
         if(currentState instanceof RectangleState){
           println("play start " + currentState.getClass().getName());
-          audioTrigger.circleEndTrigger();
+          audioTrigger.rectangleEndTrigger();
         }
         break;
       case TriangleCreated:
