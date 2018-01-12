@@ -27,7 +27,7 @@ class Node {
   float minX=5, minY=5, maxX=WindowWidth-5, maxY=WindowHeight-WallHeight-5;
 
   // damping of the velocity (0 = no damping, 1 = full damping)
-  float damping = .01;
+  float damping = .005;
 
   // strength: positive for attraction, negative for repulsion
   float strength = 2;  

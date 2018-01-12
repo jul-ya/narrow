@@ -1,5 +1,9 @@
 //Nearest Neighbour State
 //meins - Elmar
+
+
+
+
 public class PlexusState extends State{
   
   //****************CONFIG********************
@@ -20,6 +24,9 @@ public class PlexusState extends State{
 
   int alpha = 150;
   
+  public int triangleCount = 0;
+  
+
   //****************END CONFIG******************
   boolean running = false;
   ArrayList<Node> playerNodes = new ArrayList<Node>(0);
@@ -30,36 +37,35 @@ public class PlexusState extends State{
   //Triangles to draw
   ArrayList<Triangle> triangles = new ArrayList<Triangle>(0);
   
+  
   //PlayerMap is global now (StateMachine)
   public PlexusState(StateMachine stateMachine){
     super(stateMachine);
+    
   }
   
   void enterTransition(State from, float time) {
     println("enter " + this.getClass().getName());
+    triangleCount = 0;
+    init();
+    pg.smooth();
+    pg.noFill();
+    pg.stroke(255);
   }
   
   void update(){
     
     super.update();
-    
-    if(!running)
-      init();
-      
-    pg.smooth();
-    pg.noFill();
-    pg.stroke(255);
+
     //If Game has started
-    if(running)
-    { 
+ 
       //Just to See if Game is running
-      pg.background(20);
-      
+      pg.background(20,100);
+    
       
       updatePlayer();
       updatePoints();
       connect();
-      displayConnections();
       
       //Enemy Stuff
       spawnEnemies();
@@ -67,7 +73,11 @@ public class PlexusState extends State{
       drawEnemies();
       updateTriangles();
       drawTriangles();
-    }
+      displayConnections();
+      
+      if(triangleCount > maxTriangles && !stateMachine.stateInit)
+        stateMachine.transitionTo(new RectangleState(stateMachine), 2);
+   
   
   }
   
@@ -166,19 +176,20 @@ public class PlexusState extends State{
       if(connections > 1)
       {
         triangles.add(new Triangle(new PVector(e.x, e.y), new PVector(playerNodes.get(index1).x, playerNodes.get(index1).y), new PVector(playerNodes.get(index2).x, playerNodes.get(index2).y)));
+        triangleCount += 1;
         soundInitiator.playSound(SoundEvent.TriangleCreated);
         enemies.remove(i);
       }
     }
   }
   
-  int currentCol = 255;
+  int enemyColor = 255;
   void drawEnemies()
   {
       pg.noStroke();
-      currentCol = (int)(120 * Math.sin(float(frameCount) * 0.25 ) + 120);
+      enemyColor = (int)(120 * Math.sin(float(frameCount) * 0.25 ) + 120);
       
-      pg.fill(currentCol);
+      pg.fill(enemyColor);
       //pg.fill(255, 100);
       for(int i = 0; i < enemies.size(); i++)
       {
@@ -198,15 +209,17 @@ public class PlexusState extends State{
       
   }
   
-  
+  int myParm = 400;
   void drawTriangles(){
-    
       for( int i = 0; i < triangles.size(); i++)
       {
+       
         Triangle t = triangles.get(i);
         t.paint(pg);
       }
-      
+       
+
+
   }
   
   //**************DRAW*************//
