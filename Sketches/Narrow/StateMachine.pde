@@ -10,7 +10,7 @@ class StateMachine {
   State newState;
   PApplet applet;
   
-  boolean stateInit = true;
+  public boolean stateInit = true;
   
   StateMachine(PApplet applet){
     this.applet = applet;

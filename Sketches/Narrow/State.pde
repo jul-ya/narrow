@@ -1,6 +1,7 @@
 public abstract class State{
   
   protected StateMachine m;
+  
   public PGraphics pg;
   public Player curPlayer;
   public Attractor curAttractor;
