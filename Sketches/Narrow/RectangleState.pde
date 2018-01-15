@@ -1,6 +1,6 @@
 import de.looksgood.ani.*;
 
-float rectIncreasePerSecond = 10;
+float rectIncreasePerSecond = rectIncreasePerSecondStart;
 float rectAlpha = 0;
 
 public class RectangleState extends State {

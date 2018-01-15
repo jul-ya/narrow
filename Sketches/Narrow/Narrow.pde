@@ -32,8 +32,8 @@ int lineWeight = 10/shrink; //linewidth
 int maxTriangles = 125; //max Num of Triangles
 
 // CONFIG RECTANGLE STATE
-float rectIncreasePerSecondStart = 10; // the size increase in pixels per second at start
-float rectIncreasePerSecondEnd = 500; // the size increase in pixels per second at end
+float rectIncreasePerSecondStart = 50/shrink; // the size increase in pixels per second at start
+float rectIncreasePerSecondEnd = 2500/shrink; // the size increase in pixels per second at end
 float rectIncreaseTime = 20f; // the time the state lasts
 
 //*******************************
