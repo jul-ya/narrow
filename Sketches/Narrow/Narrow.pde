@@ -62,10 +62,10 @@ void settings()
 
 void setup()
 {
+  //fullScreen(P2D, SPAN);
+  //noCursor();
   
-  //fullScreen(P2D, SPAN); //Uncomment this!
   frameRate(30);
-  
   noStroke();
   fill(0);
   
@@ -94,7 +94,7 @@ void draw()
 void keyPressed()
 {
   switch(key)
-  { //<>//
+  { //<>// //<>//
   case 'x':
     stateMachine.transitionTo(new PlexusState(stateMachine), 2);
     break;
